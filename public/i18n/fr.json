@@ -25,5 +25,15 @@
   "Back to the game": "Retour au jeu",
   "Settings": "Configuration",
   "Mute sound": "Couper le son",
-  "Unmute sound": "Rétablir le son"
+  "Unmute sound": "Rétablir le son",
+  "Voice sounds": "Sons de voix",
+  "Enabled": "Activé",
+  "Disabled": "Désactivé",
+  "Are you sure you want to reset all settings? This action cannot be undone.": "Êtes-vous sûr de vouloir réinitialiser tous les paramètres ? Cette action est irréversible.",
+  "Settings automatically saved": "Paramètres sauvegardés automatiquement",
+  "Voice-over": "Voix off",
+  "Controls voice announcements (French only)": "Contrôle les annonces vocales (en français uniquement)",
+  "Reset all settings": "Réinitialiser tous les paramètres",
+  "Restore default configuration (rounds, time, sounds)": "Restaurer la configuration par défaut (niveaux, temps, sons)",
+  "Reset": "Réinitialiser"
 }

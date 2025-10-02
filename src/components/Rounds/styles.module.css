@@ -36,6 +36,7 @@
   max-height: 500px;
   overflow-y: auto;
   padding-right: 10px;
+  margin-bottom: 30px;
 }
 
 .roundsList::-webkit-scrollbar {
@@ -146,30 +147,30 @@
     align-items: stretch;
     text-align: center;
   }
-  
+
   .header h2 {
     font-size: 1.3rem;
   }
-  
+
   .round {
     padding: 15px;
   }
-  
+
   .roundInputs {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  
+
   .roundHeader {
     gap: 10px;
     align-items: stretch;
   }
-  
+
   .roundHeader h3 {
     font-size: 1.1rem;
     text-align: center;
   }
-  
+
   .deleteButton {
     align-self: center;
     padding: 8px 12px;
@@ -182,25 +183,26 @@
     padding: 12px;
     margin-bottom: 12px;
   }
-  
+
   .roundsList {
     max-height: 400px;
+    margin-bottom: 20px;
   }
-  
+
   .input {
     padding: 10px;
     font-size: 14px;
   }
-  
+
   .label {
     font-size: 13px;
   }
-  
+
   .addButton {
     padding: 10px 20px;
     font-size: 14px;
   }
-  
+
   .deleteButton {
     padding: 6px 10px;
     font-size: 14px;

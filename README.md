@@ -6,13 +6,18 @@ A responsive timer application for poker games, with round management, blinds, a
 
 ## Features
 
-- 📱 Responsive design
-- ⏱️ Automatic timer for each poker round
-- 💰 Blind management (small blind / big blind)
-- 🎮 Controls: start, pause, reset, next/previous round
-- 🔊 Integrated sounds (French voice)
-- 🔇 Sound control (enable/disable)
-- 🔤 Multilingual (French/English with auto-detection)
+- 📱 **Responsive design** - Optimized for mobile, tablet, and desktop
+- ⏱️ **Automatic timer** for each poker round with customizable durations
+- 💰 **Blind management** with configurable small/big blind values
+- 🎮 **Game controls**: start, pause, reset, next/previous round
+- 🔊 **Voice control** - Separate toggle for voice-over sounds (French voice only)
+- 🔇 **Sound management** - Global sound control
+- 🔤 **Multilingual** - French/English with automatic browser language detection
+- 💾 **Persistent settings** - Automatic localStorage saving of all configurations
+- ⚙️ **Round configuration** - Add/edit/remove rounds with custom blinds and times
+- 🔄 **Reset functionality** - Restore default settings with confirmation
+- 🎯 **Current round tracking** - Visual indication of active round
+- 📊 **Next blinds preview** - See upcoming round information
 
 ## Installation
 
@@ -32,20 +37,68 @@ A responsive timer application for poker games, with round management, blinds, a
    npm run dev
    ```
 
+## Available Scripts
+
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint code quality checks
+- `npm run extract-strings` - Extract translation strings for i18n
+
 ## Usage
 
-- Open the application in your browser.
-- Configure rounds if necessary in the "Settings" view.
-- Start the timer to begin the game.
-- Use the buttons to control the timer and navigate between rounds.
-- Enable/disable sound with the 🔊/🔇 button.
+### Getting Started
+1. Open the application in your browser at [poker.maximepzv.dev](https://poker.maximepzv.dev)
+2. The timer loads with default tournament structure (9 rounds)
+3. Click **▶ START** to begin the first round
+
+### Game Controls
+- **▶ START/⏸ PAUSE**: Control timer execution
+- **⏹ RESET**: Reset current round timer
+- **⏭ NEXT/⏮ PREVIOUS**: Navigate between rounds manually
+- **🔊/🔇**: Toggle all sounds on/off
+
+### Configuration
+1. Click **⚙️ Settings** to access configuration
+2. **Global Time**: Set default duration for all rounds
+3. **Voice Sounds**: Toggle voice announcements (shuffle up and deal, up)
+4. **Round Configuration**: 
+   - Add new rounds with **+ Add Round**
+   - Edit existing blinds and times
+   - Remove rounds as needed
+5. **Reset Settings**: Restore default configuration (with confirmation)
+
+### Features
+- **Auto-save**: All settings are automatically saved to your browser
+- **Responsive**: Works perfectly on phones, tablets, and desktops  
+- **Multilingual**: Automatic language detection (French/English)
+- **Audio**: French voice announcements and sound effects
 
 ## Project Structure
 
-- `src/App.jsx`: Main component
-- `src/components/`: UI components
-- `src/views/`: Main views (Game, Settings)
-- `public/sounds/`: Audio files
+```
+poker-timer/
+├── public/
+│   ├── sounds/           # Audio files
+│   ├── i18n/            # Translation files (en.json, fr.json)
+│   ├── favicon.svg      # Custom poker chip favicon
+│   ├── preview.jpg      # Social media preview image
+│   └── manifest.json    # PWA manifest
+├── src/
+│   ├── components/      # Reusable UI components
+│   │   ├── Timer/       # Main timer display
+│   │   ├── ControlButtons/ # Game control buttons
+│   │   ├── Rounds/      # Round configuration interface
+│   │   ├── Menu/        # Navigation menu
+│   │   └── ...
+│   ├── views/           # Main application views
+│   │   ├── GameView.jsx # Game interface
+│   │   └── SettingsView.jsx # Configuration interface
+│   ├── hooks/           # Custom React hooks
+│   │   └── useLocalStorage.js # Settings persistence
+│   └── App.jsx          # Main application component
+└── vite.config.js       # Build configuration
+```
 
 ## Responsive Breakpoints
 
@@ -56,11 +109,14 @@ A responsive timer application for poker games, with round management, blinds, a
 
 ## Technologies Used
 
-- **React 19** - UI Framework
-- **Vite 5** - Build tool and dev server
-- **CSS Modules** - Scoped styling
-- **i18next** - Internationalization
-- **PWA Ready** - Progressive Web App features
+- **React** - UI Framework
+- **Vite** - Build tool and development server
+- **CSS Modules** - Scoped styling with responsive design
+- **i18next** - Internationalization with auto-detection
+- **react-i18next** - React integration for translations
+- **Custom Hooks** - useLocalStorage for settings persistence
+- **PWA Ready** - Progressive Web App with manifest and icons
+- **Audio System** - HTML5 Audio API for sound management
 
 ## License
 

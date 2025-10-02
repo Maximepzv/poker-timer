@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useUserSettings } from '@hooks/useLocalStorage';
 import GameView from '@views/GameView';
 import SettingsView from '@views/SettingsView';
 import Menu from '@components/Menu';
@@ -8,24 +9,24 @@ import '@app/App.css';
 
 const App = () => {
     const { t } = useTranslation();
-    const [rounds, setRounds] = useState([
-        { smallBlind: 1, bigBlind: 2, time: 17 },
-        { smallBlind: 2, bigBlind: 4, time: 17 },
-        { smallBlind: 5, bigBlind: 10, time: 17 },
-        { smallBlind: 10, bigBlind: 20, time: 17 },
-        { smallBlind: 15, bigBlind: 30, time: 17 },
-        { smallBlind: 25, bigBlind: 50, time: 17 },
-        { smallBlind: 50, bigBlind: 100, time: 17 },
-        { smallBlind: 75, bigBlind: 150, time: 17 },
-        { smallBlind: 100, bigBlind: 200, time: 17 },
-    ]);
-    const [globalTime, setGlobalTime] = useState(20);
+    const {
+        settings,
+        updateGlobalTime,
+        updateSoundEnabled,
+        updateVoiceSoundsEnabled,
+        updateRounds,
+        resetSettings
+    } = useUserSettings();
+    
+    // Game states (not persisted)
     const [currentRound, setCurrentRound] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [timeLeft, setTimeLeft] = useState(null);
     const [currentView, setCurrentView] = useState('game');
-    const [soundEnabled, setSoundEnabled] = useState(true);
     const [playingSounds, setPlayingSounds] = useState([]);
+    
+    // Destructure persisted settings
+    const { rounds, globalTime, soundEnabled, voiceSoundsEnabled } = settings;
 
     // Update page title when language changes
     useEffect(() => {
@@ -47,12 +48,16 @@ const App = () => {
 
                         if (currentRound < rounds.length - 1) {
                             setCurrentRound(currentRound + 1);
-                            ['alert', 'up'].forEach(soundName => {
-                                if (soundEnabled) {
-                                    const audio = new Audio(`/sounds/${soundName}.wav`);
-                                    audio.play().catch(err => console.error('Error playing sound:', err));
-                                }
-                            });
+                            // Alert sound (sound effect)
+                            if (soundEnabled) {
+                                const alertAudio = new Audio(`/sounds/alert.wav`);
+                                alertAudio.play().catch(err => console.error('Error playing sound:', err));
+                            }
+                            // Voice sound "up"
+                            if (soundEnabled && voiceSoundsEnabled) {
+                                const upAudio = new Audio(`/sounds/up.wav`);
+                                upAudio.play().catch(err => console.error('Error playing sound:', err));
+                            }
                         } else {
                             setIsRunning(false);
                         }
@@ -63,25 +68,31 @@ const App = () => {
             }, 1000);
         }
         return () => clearInterval(timer);
-    }, [isRunning, timeLeft, currentRound, rounds, soundEnabled]);
+    }, [isRunning, timeLeft, currentRound, rounds, soundEnabled, voiceSoundsEnabled]);
 
     const startTimer = () => {
         const wasRunning = isRunning;
         setIsRunning(true);
         if (!wasRunning && currentRound === 0 && timeLeft === rounds[0]?.time * 60) {
-            ['intro', 'shuffle_up_and_deal'].forEach(soundName => {
-                if (soundEnabled) {
-                    const audio = new Audio(`/sounds/${soundName}.wav`);
-                    if (soundName === 'intro') {
-                        audio.volume = 0.5;
-                    }
-                    audio.play().catch(err => console.error('Error playing sound:', err));
-                    setPlayingSounds(prev => [...prev, audio]);
-                    audio.onended = () => {
-                        setPlayingSounds(prev => prev.filter(a => a !== audio));
-                    };
-                }
-            });
+            // Intro sound (sound effect)
+            if (soundEnabled) {
+                const introAudio = new Audio(`/sounds/intro.wav`);
+                introAudio.volume = 0.5;
+                introAudio.play().catch(err => console.error('Error playing sound:', err));
+                setPlayingSounds(prev => [...prev, introAudio]);
+                introAudio.onended = () => {
+                    setPlayingSounds(prev => prev.filter(a => a !== introAudio));
+                };
+            }
+            // Voice sound "shuffle up and deal"
+            if (soundEnabled && voiceSoundsEnabled) {
+                const shuffleAudio = new Audio(`/sounds/shuffle_up_and_deal.wav`);
+                shuffleAudio.play().catch(err => console.error('Error playing sound:', err));
+                setPlayingSounds(prev => [...prev, shuffleAudio]);
+                shuffleAudio.onended = () => {
+                    setPlayingSounds(prev => prev.filter(a => a !== shuffleAudio));
+                };
+            }
         }
     };
 
@@ -115,7 +126,7 @@ const App = () => {
     };
 
     const toggleSound = () => {
-        setSoundEnabled(!soundEnabled);
+        updateSoundEnabled(!soundEnabled);
     };
 
     return (
@@ -143,11 +154,14 @@ const App = () => {
             {currentView === 'config' && (
                 <SettingsView
                     globalTime={globalTime}
-                    setGlobalTime={setGlobalTime}
+                    setGlobalTime={updateGlobalTime}
                     rounds={rounds}
-                    setRounds={setRounds}
+                    setRounds={updateRounds}
                     currentRound={currentRound}
                     setCurrentRound={setCurrentRound}
+                    voiceSoundsEnabled={voiceSoundsEnabled}
+                    setVoiceSoundsEnabled={updateVoiceSoundsEnabled}
+                    resetSettings={resetSettings}
                 />
             )}
         </div>

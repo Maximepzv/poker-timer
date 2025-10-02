@@ -1,17 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <!-- Background circle -->
-  <circle cx="50" cy="50" r="48" fill="#2c3e50" stroke="#f39c12" stroke-width="3"/>
+  <circle cx="50" cy="50" r="44" fill="#2c3e50" stroke="#f39c12" stroke-width="4"/>
   
   <!-- Poker chip design -->
-  <circle cx="50" cy="50" r="35" fill="#34495e"/>
+  <circle cx="50" cy="50" r="36" fill="#34495e"/>
   
-  <!-- White segments -->
-  <path d="M 50 15 L 50 23 A 27 27 0 0 1 60.6 19.4 L 64.8 11.7 A 38 38 0 0 0 50 15" fill="white"/>
-  <path d="M 64.8 88.3 L 60.6 80.6 A 27 27 0 0 1 50 77 L 50 85 A 38 38 0 0 0 64.8 88.3" fill="white"/>
-  <path d="M 11.7 35.2 L 19.4 39.4 A 27 27 0 0 1 23 50 L 15 50 A 38 38 0 0 0 11.7 35.2" fill="white"/>
-  <path d="M 85 50 L 77 50 A 27 27 0 0 1 80.6 60.6 L 88.3 64.8 A 38 38 0 0 0 85 50" fill="white"/>
+  <!-- White circle ring -->
+  <circle cx="50" cy="50" r="28" fill="white"/>
+  <circle cx="50" cy="50" r="22" fill="#34495e"/>
   
-  <!-- Center circle with value -->
-  <circle cx="50" cy="50" r="20" fill="#f39c12"/>
-  <text x="50" y="58" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">♠</text>
+  <!-- Center circle with simple white dot -->
+  <circle cx="50" cy="50" r="17" fill="#f39c12"/>
+  <circle cx="50" cy="50" r="6" fill="white"/>
 </svg>

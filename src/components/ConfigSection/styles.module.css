@@ -7,6 +7,27 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+.autoSaveInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #27ae60;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.autoSaveIcon {
+  font-size: 14px;
+}
+
+.autoSaveText {
+  flex: 1;
+}
+
 .globalTimeSection {
   display: flex;
   align-items: flex-end;
@@ -67,11 +88,145 @@
   transform: translateY(-2px);
 }
 
+.soundSettings {
+  background-color: #2c3e50;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.settingGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.settingInfo {
+  flex: 1;
+}
+
+.settingTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ecf0f1;
+  margin-bottom: 8px;
+}
+
+.settingIcon {
+  font-size: 20px;
+}
+
+.settingDescription {
+  color: #bdc3c7;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-left: 32px;
+}
+
+/* Toggle Switch Styles */
+.toggleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.toggleInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleLabel {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 32px;
+  background-color: #7f8c8d;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggleLabel:hover {
+  transform: scale(1.05);
+}
+
+.toggleSlider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.toggleInput:checked + .toggleLabel {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.toggleInput:checked + .toggleLabel .toggleSlider {
+  transform: translateX(28px);
+  background: linear-gradient(135deg, #ffffff, #ecf0f1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.resetSettings {
+  background-color: #2c3e50;
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid #e74c3c;
+}
+
+.resetOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.resetDescription {
+  color: #bdc3c7;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: 5px;
+}
+
+.resetButton {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s;
+  min-width: 80px;
+}
+
+.resetButton:hover {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 768px) {
   .config {
     padding: 20px;
     margin: 15px;
     border-radius: 10px;
+  }
+  
+  .autoSaveInfo {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin-bottom: 15px;
   }
   
   .globalTimeSection {
@@ -88,12 +243,55 @@
   .applyButton {
     align-self: flex-start;
   }
+  
+  .soundSettings {
+    padding: 20px;
+  }
+  
+  .settingGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .settingTitle {
+    font-size: 15px;
+  }
+  
+  .settingDescription {
+    margin-left: 0;
+    margin-top: 4px;
+  }
+  
+  .toggleContainer {
+    align-self: flex-end;
+  }
+  
+  .resetSettings {
+    padding: 15px;
+  }
+  
+  .resetOption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .resetButton {
+    align-self: flex-end;
+  }
 }
 
 @media (max-width: 480px) {
   .config {
     padding: 15px;
     margin: 10px;
+  }
+  
+  .autoSaveInfo {
+    font-size: 11px;
+    padding: 5px 8px;
+    margin-bottom: 12px;
   }
   
   .globalTimeSection {
@@ -109,5 +307,48 @@
   .applyButton {
     padding: 10px 20px;
     font-size: 14px;
+  }
+  
+  .soundSettings {
+    padding: 16px;
+  }
+  
+  .settingTitle {
+    font-size: 14px;
+  }
+  
+  .settingIcon {
+    font-size: 18px;
+  }
+  
+  .settingDescription {
+    font-size: 13px;
+  }
+  
+  .toggleLabel {
+    width: 52px;
+    height: 28px;
+    border-radius: 14px;
+  }
+  
+  .toggleSlider {
+    width: 22px;
+    height: 22px;
+    top: 3px;
+    left: 3px;
+  }
+  
+  .toggleInput:checked + .toggleLabel .toggleSlider {
+    transform: translateX(24px);
+  }
+  
+  .resetSettings {
+    padding: 12px;
+  }
+  
+  .resetButton {
+    padding: 8px 16px;
+    font-size: 13px;
+    min-width: 70px;
   }
 }

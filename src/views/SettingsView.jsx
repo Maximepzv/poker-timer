@@ -6,7 +6,10 @@ const SettingsView = ({
     rounds,
     setRounds,
     currentRound,
-    setCurrentRound
+    setCurrentRound,
+    voiceSoundsEnabled,
+    setVoiceSoundsEnabled,
+    resetSettings
 }) => {
     return (
         <ConfigSection
@@ -16,6 +19,9 @@ const SettingsView = ({
             setRounds={setRounds}
             currentRound={currentRound}
             setCurrentRound={setCurrentRound}
+            voiceSoundsEnabled={voiceSoundsEnabled}
+            setVoiceSoundsEnabled={setVoiceSoundsEnabled}
+            resetSettings={resetSettings}
         />
     );
 };

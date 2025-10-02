@@ -1,0 +1,61 @@
+import { useEffect, useRef } from 'react';
+import styles from './styles.module.css';
+
+const RoundsSidebar = ({ rounds, currentRound, timeLeft }) => {
+    const roundsListRef = useRef(null);
+
+    useEffect(() => {
+        if (roundsListRef.current) {
+            const activeItem = roundsListRef.current.querySelector('.round-item.active');
+            if (activeItem) {
+                activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    }, [currentRound]);
+
+    const formatDuration = (minutes) => {
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        if (hours > 0) {
+            return `${hours}h ${mins}m`;
+        }
+        return `${mins} min`;
+    };
+
+    const getTotalTimeUntilRound = (roundIndex) => {
+        let totalMinutes = 0;
+        for (let i = currentRound; i < roundIndex; i++) {
+            totalMinutes += rounds[i]?.time || 0;
+        }
+
+        totalMinutes += Math.floor(timeLeft / 60);
+        return totalMinutes;
+    };
+
+    return (
+        <div className={styles.sidebar}>
+            <div className={styles.roundsList} ref={roundsListRef}>
+                {rounds.map((round, index) => (
+                    <div key={index} className={`round-item ${index === currentRound ? 'active' : ''}`}>
+                        <div className="round-header">
+                            <span className="round-title">ROUND {index + 1}</span>
+                            <span className="round-blinds">{round.smallBlind}/{round.bigBlind}</span>
+                        </div>
+                        <div className="round-time">
+                            {index === currentRound
+                                ? formatDuration(Math.floor(timeLeft / 60))
+                                : `${round.time} min`}
+                        </div>
+                        {index > currentRound && (
+                            <div className="round-time">
+                                {formatDuration(getTotalTimeUntilRound(index))}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default RoundsSidebar;

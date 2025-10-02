@@ -1,0 +1,23 @@
+.mainTimer {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border-radius: 20px;
+  padding: 40px 60px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  min-width: 400px;
+}
+
+.timerDisplay {
+  font-size: 6rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.blindsDisplay {
+  font-size: 1.8rem;
+  color: white;
+  margin-top: 20px;
+  font-weight: bold;
+}

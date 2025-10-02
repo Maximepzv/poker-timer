@@ -1,0 +1,39 @@
+{
+  "name": "poker-timer",
+  "version": "1.0.0",
+  "description": "Application web pour gérer les rounds d'une partie de poker.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext .js,.jsx",
+    "preview": "vite preview"
+  },
+  "author": "Maxime Pouezevara",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^6.1.0",
+    "globals": "^16.4.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.36.0",
+    "eslint-plugin-unicorn": "^61.0.2",
+    "vite": "^5.4.8"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

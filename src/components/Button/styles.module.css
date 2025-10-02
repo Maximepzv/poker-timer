@@ -1,0 +1,9 @@
+.button {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}

@@ -43,7 +43,7 @@ jobs:
   build-android:
     needs: build-web
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v')
     
     steps:
       - name: Checkout code
@@ -101,9 +101,49 @@ jobs:
           sed -i '/namespace "dev.maximepzv.poker"/a\\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_22\n        targetCompatibility JavaVersion.VERSION_22\n    }' app/build.gradle
           ./gradlew bundleRelease
 
+      - name: Generate Changelog
+        run: |
+          mkdir -p fastlane/metadata/android/en-US/changelogs
+          
+          # Extract version number from tag (ex: v1.0.1 -> 1.0.1)
+          VERSION=${GITHUB_REF#refs/tags/v}
+          TIMESTAMP=$(date +%s)
+          CHANGELOG_FILE="fastlane/metadata/android/en-US/changelogs/${TIMESTAMP}.txt"
+          
+          # Generate changelog based on commits since last tag
+          echo "🚀 Version ${VERSION} - $(date '+%d/%m/%Y')" > ${CHANGELOG_FILE}
+          echo "" >> ${CHANGELOG_FILE}
+          
+          # Get commits since last tag
+          LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          if [ -n "$LAST_TAG" ]; then
+            echo "📋 Changes since ${LAST_TAG}:" >> ${CHANGELOG_FILE}
+            echo "" >> ${CHANGELOG_FILE}
+            git log ${LAST_TAG}..HEAD --pretty=format:"• %s" --no-merges >> ${CHANGELOG_FILE}
+          else
+            echo "🎉 First release!" >> ${CHANGELOG_FILE}
+            echo "" >> ${CHANGELOG_FILE}
+            echo "• Poker Timer application" >> ${CHANGELOG_FILE}
+            echo "• Intuitive user interface" >> ${CHANGELOG_FILE}
+            echo "• Poker rounds management" >> ${CHANGELOG_FILE}
+            echo "• Timer with sound alerts" >> ${CHANGELOG_FILE}
+          fi
+
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
           name: android-aab
           path: android/app/build/outputs/bundle/release/app-release.aab
           retention-days: 30
+
+      - name: Deploy to Google Play Internal Testing
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: dev.maximepzv.poker
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: internal
+          status: completed
+          inAppUpdatePriority: 2
+          whatsNewDirectory: fastlane/metadata/android/en-US/changelogs

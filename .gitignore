@@ -121,3 +121,8 @@ fastlane/metadata/
 !*.config.json
 google-services.json
 service-account-key.json
+
+# Private files
+docs/
+assets/
+scripts/

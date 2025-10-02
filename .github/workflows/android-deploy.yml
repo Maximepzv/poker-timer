@@ -8,7 +8,7 @@ on:
     branches: [master]
 
 env:
-  JAVA_VERSION: '17'
+  JAVA_VERSION: '22'
   NODE_VERSION: '22'
 
 jobs:
@@ -93,6 +93,12 @@ jobs:
       - name: Build Android AAB
         run: |
           cd android
+          # Force Java 22 compatibility in gradle.properties
+          echo "org.gradle.java.home=$JAVA_HOME" >> gradle.properties
+          echo "android.defaults.buildfeatures.buildconfig=true" >> gradle.properties
+          echo "android.nonTransitiveRClass=false" >> gradle.properties
+          # Add Java 22 compatibility to app build.gradle
+          sed -i '/namespace "dev.maximepzv.poker"/a\\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_22\n        targetCompatibility JavaVersion.VERSION_22\n    }' app/build.gradle
           ./gradlew bundleRelease
 
       - name: Upload AAB artifact

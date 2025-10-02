@@ -2,6 +2,25 @@
   display: flex;
   gap: 20px;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .controlButtons {
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .controlButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }
 
 :global(.btn) {
@@ -17,6 +36,25 @@
   gap: 10px;
   min-width: 120px;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  :global(.btn) {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  :global(.btn) {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    min-width: 80px;
+    width: 100%;
+    max-width: none;
+    gap: 5px;
+  }
 }
 
 :global(.btn-start) {

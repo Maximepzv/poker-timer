@@ -26,7 +26,11 @@ const MainLayout = ({
                 nextRound={nextRound}
                 previousRound={previousRound}
             />
-            <RoundsSidebar rounds={rounds} currentRound={currentRound} timeLeft={timeLeft} />
+            <RoundsSidebar 
+                rounds={rounds} 
+                currentRound={currentRound} 
+                timeLeft={timeLeft}
+            />
         </div>
     );
 };

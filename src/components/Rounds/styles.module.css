@@ -138,3 +138,76 @@
 .input:hover {
   border-color: #5dade2;
 }
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .round {
+    padding: 15px;
+  }
+  
+  .roundInputs {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .roundHeader {
+    gap: 10px;
+    align-items: stretch;
+  }
+  
+  .roundHeader h3 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .deleteButton {
+    align-self: center;
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .round {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .roundsList {
+    max-height: 400px;
+  }
+  
+  .input {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .label {
+    font-size: 13px;
+  }
+  
+  .addButton {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .deleteButton {
+    padding: 6px 10px;
+    font-size: 14px;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

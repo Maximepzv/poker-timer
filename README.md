@@ -1,14 +1,15 @@
 # Poker Timer
 
-A timer application for poker games, with round management, blinds, and sounds.
+A responsive timer application for poker games, with round management, blinds, and sounds. Optimized for mobile, tablet, and desktop devices.
 
 ## Features
 
-- Automatic timer for each poker round
-- Blind management (small blind / big blind)
-- Controls: start, pause, reset, next/previous round
-- Integrated sounds (French voice)
-- Sound control (enable/disable)
+- 📱 Responsive design
+- ⏱️ Automatic timer for each poker round
+- 💰 Blind management (small blind / big blind)
+- 🎮 Controls: start, pause, reset, next/previous round
+- 🔊 Integrated sounds (French voice)
+- 🔇 Sound control (enable/disable)
 
 ## Installation
 
@@ -42,6 +43,13 @@ A timer application for poker games, with round management, blinds, and sounds.
 - `src/components/`: UI components
 - `src/views/`: Main views (Game, Settings)
 - `public/sounds/`: Audio files
+
+## Responsive Breakpoints
+
+- **Mobile**: ≤ 480px
+- **Tablet**: 481px - 768px
+- **Laptop**: 769px - 1024px
+- **Desktop**: ≥ 1025px
 
 ## Technologies Used
 

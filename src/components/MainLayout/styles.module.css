@@ -5,3 +5,24 @@
   margin: 0 auto;
   align-items: flex-start;
 }
+
+@media (max-width: 1024px) {
+  .mainLayout {
+    gap: 20px;
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainLayout {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainLayout {
+    gap: 15px;
+  }
+}

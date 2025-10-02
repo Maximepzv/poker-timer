@@ -5,3 +5,15 @@
   align-items: center;
   gap: 30px;
 }
+
+@media (max-width: 768px) {
+  .gameArea {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gameArea {
+    gap: 15px;
+  }
+}

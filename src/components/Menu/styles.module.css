@@ -1,7 +1,45 @@
-.settingsButton {
+.menuContainer {
   position: absolute;
   top: 30px;
   right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 100;
+}
+
+.languageSelector {
+  display: flex;
+  gap: 3px;
+  background: rgba(52, 73, 94, 0.8);
+  border-radius: 15px;
+  padding: 3px;
+}
+
+.langButton {
+  background: none;
+  border: none;
+  color: #bdc3c7;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 12px;
+  transition: all 0.3s;
+  min-width: auto;
+}
+
+.langButton:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.langButton.active {
+  color: white;
+  background: #3498db;
+}
+
+.settingsButton {
   background: none;
   border: none;
   color: #95a5a6;
@@ -16,7 +54,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
 }
 
 .settingsButton:hover {
@@ -26,23 +63,49 @@
 }
 
 @media (max-width: 768px) {
-  .settingsButton {
+  .menuContainer {
     top: 15px;
     right: 15px;
+    gap: 10px;
+    position: fixed;
+  }
+  
+  .settingsButton {
     width: 40px;
     height: 40px;
     font-size: 20px;
-    position: fixed;
+  }
+  
+  .languageSelector {
+    padding: 2px;
+  }
+  
+  .langButton {
+    font-size: 10px;
+    padding: 3px 6px;
   }
 }
 
 @media (max-width: 480px) {
-  .settingsButton {
+  .menuContainer {
     top: 10px;
     right: 10px;
+    gap: 8px;
+    position: fixed;
+  }
+  
+  .settingsButton {
     width: 36px;
     height: 36px;
     font-size: 18px;
-    position: fixed;
+  }
+  
+  .languageSelector {
+    padding: 2px;
+  }
+  
+  .langButton {
+    font-size: 9px;
+    padding: 2px 5px;
   }
 }

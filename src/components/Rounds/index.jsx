@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import styles from './styles.module.css';
 import Button from '@components/Button';
 
 const Rounds = ({ rounds, setRounds, currentRound, setCurrentRound, globalTime }) => {
+    const { t } = useTranslation();
+
     const addRound = () => {
         setRounds([...rounds, { smallBlind: 1, bigBlind: 2, time: globalTime }]);
     };
@@ -24,19 +27,19 @@ const Rounds = ({ rounds, setRounds, currentRound, setCurrentRound, globalTime }
     return (
         <div className={styles.rounds}>
             <div className={styles.header}>
-                <h2>Configuration des Rounds</h2>
-                <Button onClick={addRound} className={styles.addButton}>+ Ajouter un Round</Button>
+                <h2>{t('Rounds Configuration')}</h2>
+                <Button onClick={addRound} className={styles.addButton}>{t('+ Add Round')}</Button>
             </div>
             <div className={styles.roundsList}>
                 {rounds.map((round, index) => (
                     <div key={index} className={styles.round}>
                         <div className={styles.roundHeader}>
-                            <h3>Round {index + 1}</h3>
+                            <h3>{t('ROUND {{number}}', { number: index + 1 })}</h3>
                             <Button onClick={() => removeRound(index)} className={styles.deleteButton}>✕</Button>
                         </div>
                         <div className={styles.roundInputs}>
                             <div className={styles.inputGroup}>
-                                <label className={styles.label}>Petite Blinde</label>
+                                <label className={styles.label}>{t('Small Blind')}</label>
                                 <input
                                     type="number"
                                     value={round.smallBlind}
@@ -46,7 +49,7 @@ const Rounds = ({ rounds, setRounds, currentRound, setCurrentRound, globalTime }
                                 />
                             </div>
                             <div className={styles.inputGroup}>
-                                <label className={styles.label}>Grande Blinde</label>
+                                <label className={styles.label}>{t('Big Blind')}</label>
                                 <input
                                     type="number"
                                     value={round.bigBlind}
@@ -56,7 +59,7 @@ const Rounds = ({ rounds, setRounds, currentRound, setCurrentRound, globalTime }
                                 />
                             </div>
                             <div className={styles.inputGroup}>
-                                <label className={styles.label}>Temps (min)</label>
+                                <label className={styles.label}>{t('Time (min)')}</label>
                                 <input
                                     type="number"
                                     value={round.time}

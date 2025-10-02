@@ -1,0 +1,20 @@
+{
+  "name": "Poker Timer - Tournament Manager",
+  "short_name": "Poker Timer",
+  "description": "Free web app to manage poker tournament blinds and rounds with responsive interface",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2c3e50",
+  "theme_color": "#3498db",
+  "orientation": "portrait",
+  "categories": ["games", "entertainment", "utilities"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

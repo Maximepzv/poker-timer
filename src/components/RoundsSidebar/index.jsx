@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './styles.module.css';
 
 const RoundsSidebar = ({ rounds, currentRound, timeLeft }) => {
+    const { t } = useTranslation();
     const roundsListRef = useRef(null);
 
     useEffect(() => {
@@ -19,7 +21,7 @@ const RoundsSidebar = ({ rounds, currentRound, timeLeft }) => {
         if (hours > 0) {
             return `${hours}h ${mins}m`;
         }
-        return `${mins} min`;
+        return t('min', { count: mins });
     };
 
     const getTotalTimeUntilRound = (roundIndex) => {
@@ -38,13 +40,13 @@ const RoundsSidebar = ({ rounds, currentRound, timeLeft }) => {
                 {rounds.map((round, index) => (
                     <div key={index} className={`round-item ${index === currentRound ? 'active' : ''}`}>
                         <div className="round-header">
-                            <span className="round-title">ROUND {index + 1}</span>
+                            <span className="round-title">{t('ROUND {{number}}', { number: index + 1 })}</span>
                             <span className="round-blinds">{round.smallBlind}/{round.bigBlind}</span>
                         </div>
                         <div className="round-time">
                             {index === currentRound
                                 ? formatDuration(Math.floor(timeLeft / 60))
-                                : `${round.time} min`}
+                                : t('min', { count: round.time })}
                         </div>
                         {index > currentRound && (
                             <div className="round-time">

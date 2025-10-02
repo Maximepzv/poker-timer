@@ -46,7 +46,7 @@
 @media (max-width: 768px) {
   .app {
     padding: 10px;
-    padding-top: 70px; /* Espace pour les boutons */
+    padding-top: 70px;
   }
   
   .app h1 {
@@ -62,7 +62,7 @@
 @media (max-width: 480px) {
   .app {
     padding: 5px;
-    padding-top: 70px; /* Plus d'espace pour les boutons sur très petits écrans */
+    padding-top: 70px;
   }
   
   .app h1 {

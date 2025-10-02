@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import GameView from '@views/GameView';
 import SettingsView from '@views/SettingsView';
 import Menu from '@components/Menu';
@@ -6,6 +7,7 @@ import SoundControl from '@components/SoundControl';
 import '@app/App.css';
 
 const App = () => {
+    const { t } = useTranslation();
     const [rounds, setRounds] = useState([
         { smallBlind: 1, bigBlind: 2, time: 17 },
         { smallBlind: 2, bigBlind: 4, time: 17 },
@@ -24,6 +26,11 @@ const App = () => {
     const [currentView, setCurrentView] = useState('game');
     const [soundEnabled, setSoundEnabled] = useState(true);
     const [playingSounds, setPlayingSounds] = useState([]);
+
+    // Update page title when language changes
+    useEffect(() => {
+        document.title = t('Poker Timer');
+    }, [t]);
 
     useEffect(() => {
         if (currentView === 'game') {

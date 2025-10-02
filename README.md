@@ -1,5 +1,7 @@
 # Poker Timer
 
+🎯 **Live Demo**: [poker.maximepzv.dev](https://poker.maximepzv.dev)
+
 A responsive timer application for poker games, with round management, blinds, and sounds. Optimized for mobile, tablet, and desktop devices.
 
 ## Features
@@ -10,6 +12,7 @@ A responsive timer application for poker games, with round management, blinds, a
 - 🎮 Controls: start, pause, reset, next/previous round
 - 🔊 Integrated sounds (French voice)
 - 🔇 Sound control (enable/disable)
+- 🔤 Multilingual (French/English with auto-detection)
 
 ## Installation
 
@@ -53,6 +56,16 @@ A responsive timer application for poker games, with round management, blinds, a
 
 ## Technologies Used
 
-- React
-- Vite
-- CSS Modules
+- **React 19** - UI Framework
+- **Vite 5** - Build tool and dev server
+- **CSS Modules** - Scoped styling
+- **i18next** - Internationalization
+- **PWA Ready** - Progressive Web App features
+
+## License
+
+AGPL-3.0 - See LICENSE file for details
+
+## Author
+
+**Maxime Pouezevara**

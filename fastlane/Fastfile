@@ -1,0 +1,34 @@
+# Fastlane configuration for Poker Timer Android deployment
+
+default_platform(:android)
+
+platform :android do
+  desc "Deploy to Google Play Internal Testing"
+  lane :deploy do
+    # Build configuration
+    aab_path = ENV["AAB_PATH"] || "../android/app/build/outputs/bundle/release/app-release.aab"
+    json_key_path = ENV["GOOGLE_PLAY_JSON_KEY_PATH"]
+    
+    # Validate required files exist
+    unless File.exist?(aab_path)
+      UI.user_error!("AAB file not found at: #{aab_path}")
+    end
+    
+    unless File.exist?(json_key_path)
+      UI.user_error!("Google Play service account key not found at: #{json_key_path}")
+    end
+
+    # Upload to Google Play Internal Testing
+    upload_to_play_store(
+      json_key: json_key_path,
+      aab: aab_path,
+      package_name: "dev.maximepzv.poker",
+      track: "internal",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+    
+    UI.success("Successfully uploaded AAB to Google Play Internal Testing! 🎉")
+  end
+end

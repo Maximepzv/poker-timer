@@ -93,3 +93,31 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Android sensitive files
+android/app/keystore.properties
+android/app/upload-keystore.jks
+android/app/release-keystore.jks
+android/app/src/main/assets/capacitor.config.json
+android/local.properties
+android/gradle.properties
+
+# Capacitor
+android/
+ios/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/.env
+fastlane/metadata/
+
+# Google Play Console
+*.json
+!public/**/*.json
+!src/**/*.json
+!*.config.json
+google-services.json
+service-account-key.json

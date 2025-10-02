@@ -1,0 +1,27 @@
+{
+  "appId": "dev.maximepzv.poker",
+  "appName": "Poker Timer",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": "app/keystore.properties",
+      "releaseType": "AAB"
+    }
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#2c3e50",
+      "androidSplashResourceName": "splash",
+      "showSpinner": true,
+      "spinnerColor": "#ffffff"
+    },
+    "StatusBar": {
+      "style": "dark",
+      "backgroundColor": "#2c3e50"
+    }
+  }
+}

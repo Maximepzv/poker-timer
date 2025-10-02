@@ -8,11 +8,20 @@
     "build": "vite build",
     "lint": "eslint src --ext .js,.jsx",
     "preview": "vite preview",
-    "extract-strings": "i18next-scanner --config i18next-scanner.config.cjs"
+    "extract-strings": "i18next-scanner --config i18next-scanner.config.cjs",
+    "android:build": "npm run build && npx cap sync android",
+    "android:open": "npx cap open android",
+    "android:run": "npm run android:build && npm run android:open",
+    "android:dev": "npx cap run android --livereload --external",
+    "capacitor:sync": "npx cap sync",
+    "capacitor:copy": "npx cap copy"
   },
   "author": "Maxime Pouezevara",
   "license": "AGPL-3.0",
   "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^6.1.0",
     "globals": "^16.4.0",

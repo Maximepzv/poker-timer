@@ -74,7 +74,7 @@ jobs:
         run: npm ci
 
       - name: Add Android platform
-        run: npx cap add android --skip-existing
+        run: npx cap add android
 
       - name: Create keystore.properties
         run: |

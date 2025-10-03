@@ -24,7 +24,13 @@ const MainApp = () => {
     const [currentRound, setCurrentRound] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [timeLeft, setTimeLeft] = useState(null);
-    const [currentView, setCurrentView] = useState('game');
+    const [currentView, setCurrentView] = useState(() => {
+        const path = window.location.pathname;
+        if (path === '/privacy' || path === '/privacy.html') {
+            return 'privacy';
+        }
+        return 'game';
+    });
     const [playingSounds, setPlayingSounds] = useState([]);
     
     // Ref to store audio objects and prevent garbage collection
@@ -193,12 +199,6 @@ const MainApp = () => {
     );
 };
 
-const App = () => {
-    if (window.location.pathname === '/privacy') {
-        return <PrivacyView />;
-    }
-
-    return <MainApp />;
-};
+const App = () => <MainApp />;
 
 export default App;

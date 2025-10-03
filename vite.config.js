@@ -11,14 +11,6 @@ export default defineConfig({
   server: {
     hmr: true,
   },
-  build: {
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-        privacy: path.resolve(__dirname, 'privacy.html'),
-      },
-    },
-  },
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, 'src/components/'),

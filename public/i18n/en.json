@@ -34,5 +34,9 @@
   "Controls voice announcements (French only)": "Controls voice announcements (French only)",
   "Reset all settings": "Reset all settings",
   "Restore default configuration (rounds, time, sounds)": "Restore default configuration (rounds, time, sounds)",
-  "Reset": "Reset"
+  "Reset": "Reset",
+  "in {{timeLeft}} minutes": "in {{timeLeft}} minutes",
+  "in {{hours}}h {{mins}}m": "in {{hours}}h {{mins}}m",
+  "in {{count}} min_one": "in {{count}} min",
+  "in {{count}} min_other": "in {{count}} min"
 }

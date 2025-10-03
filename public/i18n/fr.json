@@ -35,5 +35,10 @@
   "Controls voice announcements (French only)": "Contrôle les annonces vocales (en français uniquement)",
   "Reset all settings": "Réinitialiser tous les paramètres",
   "Restore default configuration (rounds, time, sounds)": "Restaurer la configuration par défaut (niveaux, temps, sons)",
-  "Reset": "Réinitialiser"
+  "Reset": "Réinitialiser",
+  "in {{timeLeft}} minutes": "dans {{timeLeft}} minutes",
+  "in {{hours}}h {{mins}}m": "dans {{hours}}h {{mins}}m",
+  "in {{count}} min_one": "dans {{count}} min",
+  "in {{count}} min_many": "dans {{count}} min",
+  "in {{count}} min_other": "dans {{count}} min"
 }

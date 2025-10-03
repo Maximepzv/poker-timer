@@ -3,12 +3,6 @@ import styles from './styles.module.css';
 
 const NextBlinds = ({ rounds, currentRound, timeLeft }) => {
     const { t } = useTranslation();
-    
-    const formatTime = (seconds) => {
-        const minutes = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    };
 
     return (
         <div className={styles.nextBlinds}>
@@ -19,11 +13,11 @@ const NextBlinds = ({ rounds, currentRound, timeLeft }) => {
                         ? `${rounds[currentRound + 1]?.smallBlind} / ${rounds[currentRound + 1]?.bigBlind}`
                         : t('Tournament End')}
                 </span>
-                <span className={styles.nextBlindsTime}>
+                {timeLeft > 60 && <span className={styles.nextBlindsTime}>
                     {currentRound < rounds.length - 1
-                        ? t('in {{time}}', { time: formatTime(timeLeft) })
+                        ? t('in {{timeLeft}} minutes', { timeLeft: Math.floor(timeLeft / 60) })
                         : ''}
-                </span>
+                </span>}
             </div>
         </div>
     );

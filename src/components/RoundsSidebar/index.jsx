@@ -19,9 +19,9 @@ const RoundsSidebar = ({ rounds, currentRound, timeLeft }) => {
         const hours = Math.floor(minutes / 60);
         const mins = minutes % 60;
         if (hours > 0) {
-            return `${hours}h ${mins}m`;
+            return t('in {{hours}}h {{mins}}m', { hours, mins });
         }
-        return t('min', { count: mins });
+        return t('in {{count}} min', { count: mins });
     };
 
     const getTotalTimeUntilRound = (roundIndex) => {

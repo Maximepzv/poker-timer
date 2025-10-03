@@ -81,23 +81,38 @@ poker-timer/
 ├── public/
 │   ├── sounds/           # Audio files
 │   ├── i18n/            # Translation files (en.json, fr.json)
+│   ├── fonts/           # Supreme font family (WEB)
 │   ├── favicon.svg      # Custom poker chip favicon
 │   ├── preview.jpg      # Social media preview image
 │   └── manifest.json    # PWA manifest
 ├── src/
 │   ├── components/      # Reusable UI components
-│   │   ├── Timer/       # Main timer display
-│   │   ├── ControlButtons/ # Game control buttons
-│   │   ├── Rounds/      # Round configuration interface
-│   │   ├── Menu/        # Navigation menu
-│   │   └── ...
+│   │   ├── Timer/       # Main timer display with animations
+│   │   ├── ControlButtons/ # Game control buttons (start, pause, reset, etc.)
+│   │   ├── NextBlinds/  # Next round preview
+│   │   ├── GameArea/    # Game area wrapper
+│   │   ├── Rounds/      # Round settings interface
+│   │   ├── RoundsSidebar/ # Rounds navigation sidebar
+│   │   ├── SettingsSection/ # Settings configuration panel
+│   │   ├── MainLayout/  # Main game layout
+│   │   ├── Layout/      # Common layout with menu and sound control
+│   │   ├── Menu/        # Navigation menu with language selector
+│   │   ├── SoundControl/ # Global sound toggle
+│   │   └── Button/      # Reusable button component
 │   ├── views/           # Main application views
-│   │   ├── GameView.jsx # Game interface
-│   │   └── SettingsView.jsx # Configuration interface
+│   │   ├── GameView.jsx # Game interface with timer logic
+│   │   ├── SettingsView.jsx # Settings interface
+│   │   └── PrivacyView.jsx # Privacy policy page
 │   ├── hooks/           # Custom React hooks
-│   │   └── useLocalStorage.js # Settings persistence
-│   └── App.jsx          # Main application component
-└── vite.config.js       # Build configuration
+│   │   ├── useLocalStorage.js # Settings persistence
+│   │   ├── useTimer.js  # Timer state management
+│   │   └── useAudio.js  # Audio playback management
+│   ├── Routes.jsx       # Application routing configuration
+│   ├── App.jsx          # Main application component
+│   ├── App.css          # Global styles
+│   ├── reset.css        # CSS reset
+│   └── index.jsx        # Application entry point
+└── vite.config.js       # Build configuration with path aliases
 ```
 
 ## Responsive Breakpoints

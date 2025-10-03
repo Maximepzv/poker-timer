@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './styles.module.css';
 import Button from '@components/Button';
 
-const Rounds = ({ rounds, setRounds, currentRound, setCurrentRound, globalTime }) => {
+const Rounds = ({ rounds, setRounds, globalTime }) => {
     const { t } = useTranslation();
 
     const addRound = () => {
@@ -10,11 +10,6 @@ const Rounds = ({ rounds, setRounds, currentRound, setCurrentRound, globalTime }
     };
 
     const removeRound = (index) => {
-        if (index === currentRound) {
-            setCurrentRound(Math.max(0, currentRound - 1));
-        } else if (index < currentRound) {
-            setCurrentRound(currentRound - 1);
-        }
         setRounds(rounds.filter((_, index_) => index_ !== index));
     };
 
@@ -27,7 +22,7 @@ const Rounds = ({ rounds, setRounds, currentRound, setCurrentRound, globalTime }
     return (
         <div className={styles.rounds}>
             <div className={styles.header}>
-                <h2>{t('Rounds Configuration')}</h2>
+                <h2>{t('Rounds Settings')}</h2>
                 <Button onClick={addRound} className={styles.addButton}>{t('+ Add Round')}</Button>
             </div>
             <div className={styles.roundsList}>

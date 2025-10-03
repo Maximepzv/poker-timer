@@ -1,26 +1,25 @@
-import ConfigSection from '@components/ConfigSection';
+import { useUserSettings } from '@hooks/useLocalStorage';
+import SettingsSection from '@components/SettingsSection';
 
-const SettingsView = ({
-    globalTime,
-    setGlobalTime,
-    rounds,
-    setRounds,
-    currentRound,
-    setCurrentRound,
-    voiceSoundsEnabled,
-    setVoiceSoundsEnabled,
-    resetSettings
-}) => {
+const SettingsView = () => {
+    const {
+        settings,
+        updateGlobalTime,
+        updateVoiceSoundsEnabled,
+        updateRounds,
+        resetSettings
+    } = useUserSettings();
+    
+    const { rounds, globalTime, voiceSoundsEnabled } = settings;
+
     return (
-        <ConfigSection
+        <SettingsSection
             globalTime={globalTime}
-            setGlobalTime={setGlobalTime}
+            setGlobalTime={updateGlobalTime}
             rounds={rounds}
-            setRounds={setRounds}
-            currentRound={currentRound}
-            setCurrentRound={setCurrentRound}
+            setRounds={updateRounds}
             voiceSoundsEnabled={voiceSoundsEnabled}
-            setVoiceSoundsEnabled={setVoiceSoundsEnabled}
+            setVoiceSoundsEnabled={updateVoiceSoundsEnabled}
             resetSettings={resetSettings}
         />
     );

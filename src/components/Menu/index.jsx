@@ -1,14 +1,21 @@
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@components/Button';
 import styles from './styles.module.css';
 import { t } from 'i18next';
 
-const Menu = ({ currentView, setCurrentView }) => {
+const Menu = () => {
     const { i18n } = useTranslation();
-    const isSettings = currentView === 'config';
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isSettings = location.pathname === '/settings';
     
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
+    };
+
+    const toggleView = () => {
+        navigate(isSettings ? '/' : '/settings');
     };
     
     return (
@@ -31,7 +38,7 @@ const Menu = ({ currentView, setCurrentView }) => {
             </div>
             
             <Button 
-                onClick={() => setCurrentView(isSettings ? 'game' : 'config')} 
+                onClick={toggleView} 
                 className={styles.settingsButton}
                 title={isSettings ? t('Back to the game') : t('Settings')}
             >

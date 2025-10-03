@@ -1,4 +1,4 @@
-.config {
+.settings {
   background-color: #34495e;
   border-radius: 15px;
   padding: 30px;
@@ -217,7 +217,7 @@
 }
 
 @media (max-width: 768px) {
-  .config {
+  .settings {
     padding: 20px;
     margin: 15px;
     border-radius: 10px;
@@ -283,7 +283,7 @@
 }
 
 @media (max-width: 480px) {
-  .config {
+  .settings {
     padding: 15px;
     margin: 10px;
   }

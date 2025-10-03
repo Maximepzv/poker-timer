@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUserSettings } from '@hooks/useLocalStorage';
 import GameView from '@views/GameView';
 import SettingsView from '@views/SettingsView';
+import PrivacyView from '@views/PrivacyView';
 import Menu from '@components/Menu';
 import SoundControl from '@components/SoundControl';
 import '@app/App.css';
 
-const App = () => {
+const MainApp = () => {
     const { t } = useTranslation();
     const {
         settings,
@@ -18,26 +19,61 @@ const App = () => {
         resetSettings
     } = useUserSettings();
     
-    // Game states (not persisted)
+    const { rounds, globalTime, soundEnabled, voiceSoundsEnabled } = settings;
+
     const [currentRound, setCurrentRound] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [timeLeft, setTimeLeft] = useState(null);
     const [currentView, setCurrentView] = useState('game');
     const [playingSounds, setPlayingSounds] = useState([]);
     
-    // Destructure persisted settings
-    const { rounds, globalTime, soundEnabled, voiceSoundsEnabled } = settings;
+    // Ref to store audio objects and prevent garbage collection
+    const audioObjectsRef = useRef({ intro: null, shuffle: null });
+
+    const playSound = (soundPath, refKey = null, volume = 1.0) => {
+        const audio = new Audio(soundPath);
+        audio.volume = volume;
+        audio.preload = 'auto';
+
+        if (refKey) {
+            audioObjectsRef.current[refKey] = audio;
+            audio.onended = () => audioObjectsRef.current[refKey] = null;
+        }
+
+        audio.onerror = (e) => console.error(`Error playing sound ${soundPath}:`, e);
+
+        audio.load();
+        audio.play().catch(err => console.error(`Error playing sound ${soundPath}:`, err));
+
+        return audio;
+    };
+
+    const stopSound = (refKey, reset = false) => {
+        const audio = audioObjectsRef.current[refKey];
+        if (audio) {
+            audio.pause();
+            if (reset) {
+                audio.currentTime = 0;
+                audioObjectsRef.current[refKey] = null;
+            }
+        }
+    };
 
     // Update page title when language changes
+    useEffect(() => document.title = t('Poker Timer'), [t]);
+
+    // Initialize timeLeft when rounds are loaded
     useEffect(() => {
-        document.title = t('Poker Timer');
-    }, [t]);
+        if (rounds && rounds.length > 0 && timeLeft === null) {
+            setTimeLeft(rounds[0].time * 60);
+        }
+    }, [rounds, timeLeft]);
 
     useEffect(() => {
-        if (currentView === 'game') {
+        if (currentView === 'game' && !isRunning) {
             setTimeLeft(rounds[currentRound]?.time * 60 || 0);
         }
-    }, [currentRound, rounds, currentView]);
+    }, [currentRound, rounds, currentView, isRunning]);
 
     useEffect(() => {
         let timer;
@@ -49,15 +85,8 @@ const App = () => {
                         if (currentRound < rounds.length - 1) {
                             setCurrentRound(currentRound + 1);
                             // Alert sound (sound effect)
-                            if (soundEnabled) {
-                                const alertAudio = new Audio(`/sounds/alert.wav`);
-                                alertAudio.play().catch(err => console.error('Error playing sound:', err));
-                            }
-                            // Voice sound "up"
-                            if (soundEnabled && voiceSoundsEnabled) {
-                                const upAudio = new Audio(`/sounds/up.wav`);
-                                upAudio.play().catch(err => console.error('Error playing sound:', err));
-                            }
+                            if (soundEnabled)  playSound('/sounds/alert.wav');
+                            if (soundEnabled && voiceSoundsEnabled) playSound('/sounds/up.wav');
                         } else {
                             setIsRunning(false);
                         }
@@ -72,40 +101,36 @@ const App = () => {
 
     const startTimer = () => {
         const wasRunning = isRunning;
-        setIsRunning(true);
+
         if (!wasRunning && currentRound === 0 && timeLeft === rounds[0]?.time * 60) {
+            // Clear any existing sounds before playing new ones
+            playingSounds.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+
             // Intro sound (sound effect)
-            if (soundEnabled) {
-                const introAudio = new Audio(`/sounds/intro.wav`);
-                introAudio.volume = 0.5;
-                introAudio.play().catch(err => console.error('Error playing sound:', err));
-                setPlayingSounds(prev => [...prev, introAudio]);
-                introAudio.onended = () => {
-                    setPlayingSounds(prev => prev.filter(a => a !== introAudio));
-                };
-            }
+            if (soundEnabled) playSound('/sounds/intro.wav', 'intro', 0.5);
+
             // Voice sound "shuffle up and deal"
-            if (soundEnabled && voiceSoundsEnabled) {
-                const shuffleAudio = new Audio(`/sounds/shuffle_up_and_deal.wav`);
-                shuffleAudio.play().catch(err => console.error('Error playing sound:', err));
-                setPlayingSounds(prev => [...prev, shuffleAudio]);
-                shuffleAudio.onended = () => {
-                    setPlayingSounds(prev => prev.filter(a => a !== shuffleAudio));
-                };
-            }
+            if (soundEnabled && voiceSoundsEnabled) playSound('/sounds/shuffle_up_and_deal.wav', 'shuffle');
         }
+
+        setIsRunning(true);
     };
 
     const pauseTimer = () => {
         setIsRunning(false);
-        playingSounds.forEach(audio => audio.pause());
+        stopSound('intro');
+        stopSound('shuffle');
         setPlayingSounds([]);
     };
 
     const resetTimer = () => {
         setIsRunning(false);
         setTimeLeft(rounds[currentRound]?.time * 60 || 0);
-        playingSounds.forEach(audio => audio.pause());
+        stopSound('intro', true);
+        stopSound('shuffle', true);
         setPlayingSounds([]);
     };
 
@@ -125,9 +150,7 @@ const App = () => {
         }
     };
 
-    const toggleSound = () => {
-        updateSoundEnabled(!soundEnabled);
-    };
+    const toggleSound = () => updateSoundEnabled(!soundEnabled);
 
     return (
         <div className="app">
@@ -164,8 +187,18 @@ const App = () => {
                     resetSettings={resetSettings}
                 />
             )}
+
+            {currentView === 'privacy' && <PrivacyView />}
         </div>
     );
+};
+
+const App = () => {
+    if (window.location.pathname === '/privacy') {
+        return <PrivacyView />;
+    }
+
+    return <MainApp />;
 };
 
 export default App;

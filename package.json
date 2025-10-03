@@ -12,7 +12,7 @@
     "android:build": "npm run build && npx cap sync android",
     "android:open": "npx cap open android",
     "android:run": "npm run android:build && npm run android:open",
-    "android:dev": "npx cap run android --livereload --external",
+    "android:dev": "npx cap run android --live-reload",
     "capacitor:sync": "npx cap sync",
     "capacitor:copy": "npx cap copy"
   },
@@ -30,6 +30,7 @@
     "react-i18next": "^16.0.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.36.0",
     "eslint-plugin-react": "^7.37.5",

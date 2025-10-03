@@ -99,6 +99,10 @@ jobs:
           echo "android.nonTransitiveRClass=false" >> gradle.properties
           # Add Java 22 compatibility to app build.gradle
           sed -i '/namespace "dev.maximepzv.poker"/a\\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_22\n        targetCompatibility JavaVersion.VERSION_22\n    }' app/build.gradle
+          # Add signing config to release build type
+          sed -i '/buildTypes {/a\\        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"\n            signingConfig signingConfigs.release\n        }' app/build.gradle
+          # Add signing configs at the beginning of android block
+          sed -i '/android {/a\\    signingConfigs {\n        release {\n            storeFile file("../upload-keystore.jks")\n            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")\n            keyAlias System.getenv("ANDROID_KEY_ALIAS")\n            keyPassword System.getenv("ANDROID_KEY_PASSWORD")\n        }\n    }' app/build.gradle
           ./gradlew bundleRelease
 
       - name: Generate Changelog

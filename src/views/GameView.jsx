@@ -28,7 +28,7 @@ const GameView = () => {
         if (!isRunning) {
             setTimeLeft(rounds[currentRound]?.time * 60 || 0);
         }
-    }, [currentRound, rounds, isRunning, setTimeLeft]);
+    }, [currentRound, rounds, setTimeLeft]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const startTimer = () => {
         timerStart(() => {

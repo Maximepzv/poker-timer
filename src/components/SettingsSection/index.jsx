@@ -41,7 +41,18 @@ const SettingsSection = ({
                     <input
                         type="number"
                         value={globalTime}
-                        onChange={(event) => setGlobalTime(parseInt(event.target.value) || 0)}
+                        onChange={(event) => {
+                            const value = event.target.value;
+                            if (value === '') {
+                                setGlobalTime('');
+                            } else {
+                                const numValue = parseInt(value);
+                                if (numValue >= 0) {
+                                    setGlobalTime(numValue || 0);
+                                }
+                            }
+                        }}
+                        onBlur={(event) => { if (event.target.value === '') setGlobalTime(1); }}
                         className={styles.input}
                         min="1"
                     />

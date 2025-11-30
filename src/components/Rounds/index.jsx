@@ -15,8 +15,25 @@ const Rounds = ({ rounds, setRounds, globalTime }) => {
 
     const updateRound = (index, field, value) => {
         const newRounds = [...rounds];
-        newRounds[index][field] = parseInt(value) || 0;
+        if (value === '') {
+            newRounds[index][field] = '';
+        } else {
+            const numValue = parseInt(value);
+            if (numValue >= 0) {
+                newRounds[index][field] = numValue || 0;
+            } else {
+                return;
+            }
+        }
         setRounds(newRounds);
+    };
+
+    const handleBlur = (index, field) => {
+        if (rounds[index][field] === '') {
+            const newRounds = [...rounds];
+            newRounds[index][field] = field === 'time' ? 1 : 0;
+            setRounds(newRounds);
+        }
     };
 
     return (
@@ -39,6 +56,7 @@ const Rounds = ({ rounds, setRounds, globalTime }) => {
                                     type="number"
                                     value={round.smallBlind}
                                     onChange={(event) => updateRound(index, 'smallBlind', event.target.value)}
+                                    onBlur={() => handleBlur(index, 'smallBlind')}
                                     className={styles.input}
                                     min="0"
                                 />
@@ -49,6 +67,7 @@ const Rounds = ({ rounds, setRounds, globalTime }) => {
                                     type="number"
                                     value={round.bigBlind}
                                     onChange={(event) => updateRound(index, 'bigBlind', event.target.value)}
+                                    onBlur={() => handleBlur(index, 'bigBlind')}
                                     className={styles.input}
                                     min="0"
                                 />
@@ -59,6 +78,7 @@ const Rounds = ({ rounds, setRounds, globalTime }) => {
                                     type="number"
                                     value={round.time}
                                     onChange={(event) => updateRound(index, 'time', event.target.value)}
+                                    onBlur={() => handleBlur(index, 'time')}
                                     className={styles.input}
                                     min="1"
                                 />

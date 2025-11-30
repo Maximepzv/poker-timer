@@ -43,15 +43,17 @@ const RoundsSidebar = ({ rounds, currentRound, timeLeft }) => {
                             <span className="round-title">{t('ROUND {{number}}', { number: index + 1 })}</span>
                             <span className="round-blinds">{round.smallBlind}/{round.bigBlind}</span>
                         </div>
-                        <div className="round-time">
-                            {index === currentRound
-                                ? formatDuration(Math.floor(timeLeft / 60))
-                                : t('min', { count: round.time })}
-                        </div>
                         {index > currentRound && (
-                            <div className="round-time">
-                                {formatDuration(getTotalTimeUntilRound(index))}
-                            </div>
+                            <>
+                                <div className="round-time">
+                                    {index === currentRound
+                                        ? formatDuration(Math.floor(timeLeft / 60))
+                                        : t('min', { count: round.time })}
+                                </div>
+                                <div className="round-time">
+                                    {formatDuration(getTotalTimeUntilRound(index))}
+                                </div>
+                            </>
                         )}
                     </div>
                 ))}

@@ -1,5 +1,5 @@
 import Timer from '@components/Timer';
-import NextBlinds from '@components/NextBlinds';
+import BlindsValue from '@components/BlindsValue';
 import ControlButtons from '@components/ControlButtons';
 import styles from './styles.module.css';
 
@@ -18,10 +18,8 @@ const GameArea = ({
         <div className={styles.gameArea}>
             <Timer
                 timeLeft={timeLeft}
-                smallBlind={rounds[currentRound]?.smallBlind}
-                bigBlind={rounds[currentRound]?.bigBlind}
             />
-            <NextBlinds rounds={rounds} currentRound={currentRound} timeLeft={timeLeft} />
+            <BlindsValue rounds={rounds} currentRound={currentRound} />
             <ControlButtons
                 isRunning={isRunning}
                 startTimer={startTimer}
